@@ -37,7 +37,7 @@ app.get('/api/datapoint', function(req, res) {
   const time = req.query.time;
   const acceleration = req.query.acceleration;
   if(!id || !time || !acceleration || !maps[id]) {
-    res.send(null);
+    res.send(-1);
     return;
   }
   const datapoint = {
@@ -47,7 +47,7 @@ app.get('/api/datapoint', function(req, res) {
   };
   maps[id].datapoints.push(datapoint);
   maps[id].namespace.emit('datapoint', datapoint);
-  res.send(true);
+  res.send(0);
 });
 
 // socket.io stuff
