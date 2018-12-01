@@ -1,0 +1,13 @@
+{
+  "name": "accelomap",
+  "version": "0.0.1",
+  "description": "3D mapping using acceleration",
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/accelomap"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
