@@ -1,5 +1,24 @@
 body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
   overflow: hidden;
+}
+
+#landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+#landing * {
+  width: auto;
+}
+
+#homeLink {
+  position: absolute;
+  z-index: 1000;
+  bottom: 50px;
+  right: 50px;
+  color: white;
 }
