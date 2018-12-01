@@ -29,7 +29,19 @@ app.get('/api/getid', function(req, res) {
   res.send("" + id);
 });
 app.get('/api/datapoint', function(req, res) {
-  const id = req.params.id;
+  const id = req.query.id;
+  const time = req.query.time;
+  const acceleration = req.query.acceleration;
+  if(!id || !time || !acceleration || !maps[id]) {
+    res.send(null);
+    return;
+  }
+  maps[id].push({
+    id: id,
+    time: time,
+    acceleration: acceleration
+  });
+  return true;
 });
 
 // socket.io stuff
