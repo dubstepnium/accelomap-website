@@ -1,5 +1,6 @@
 // socket.io
-const socket = io();
+const id = /\/map\/(\d+)$/.exec(window.location.href)[1];
+const socket = io('/' + id);
 
 socket.on('message', function() {
   console.log('testing');

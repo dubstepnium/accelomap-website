@@ -18,14 +18,18 @@ app.use(express.static('public/'));
 
 // api endpoints
 app.get('/api/getmap', function(req, res) {
-  res.send(maps[req.query.id] || null);
+  res.send(maps[req.query.id].datapoints || null);
 });
 app.get('/api/getid', function(req, res) {
   let id;
   do {
     id = Math.floor(Math.random() * 1e6);
   } while(maps[id]);
-  maps[id] = [];
+  const nsp = io.of('/' + id);
+  maps[id] = {
+    namespace: nsp,
+    datapoints: []
+  };
   res.send("" + id);
 });
 app.get('/api/datapoint', function(req, res) {
@@ -41,8 +45,9 @@ app.get('/api/datapoint', function(req, res) {
     time: time,
     acceleration: acceleration
   };
-  maps[id].push(datapoint);
-  io.to('/map/' + id, 'datapoint', datapoint);
+  maps[id].datapoints.push(datapoint);
+  maps[id].namespace.emit('datapoint', datapoint);
+  console.log(maps[id].namespace);
   res.send(true);
 });
 
