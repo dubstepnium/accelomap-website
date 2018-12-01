@@ -4,7 +4,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 http.listen(5000 || process.env.PORT, function(){
-    console.log('listening on *:' + process.env.PORT);
+  console.log('listening on *:' + process.env.PORT);
 });
 
 // arrays to store maps
@@ -12,7 +12,7 @@ let maps = {};
 
 // routing middleware
 app.get('/map/:id', function(req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/view.html');
 });
 app.use(express.static('public/'));
 
@@ -47,7 +47,6 @@ app.get('/api/datapoint', function(req, res) {
   };
   maps[id].datapoints.push(datapoint);
   maps[id].namespace.emit('datapoint', datapoint);
-  console.log(maps[id].namespace);
   res.send(true);
 });
 
