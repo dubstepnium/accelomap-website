@@ -24,8 +24,8 @@ app.get('/api/getid', function(req, res) {
   let id;
   do {
     id = Math.floor(Math.random() * 1e6);
-    maps[id] = [];
   } while(maps[id]);
+  maps[id] = [];
   res.send("" + id);
 });
 app.get('/api/datapoint', function(req, res) {
@@ -43,7 +43,7 @@ app.get('/api/datapoint', function(req, res) {
   };
   maps[id].push(datapoint);
   io.to('/map/' + id, 'datapoint', datapoint);
-  return true;
+  res.send(true);
 });
 
 // socket.io stuff
