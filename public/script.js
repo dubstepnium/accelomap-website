@@ -1,7 +1,11 @@
+// socket.io
 const socket = io();
 
 socket.on('message', function() {
   console.log('testing');
+});
+socket.on('datapoint', function(datapoint) {
+  console.log(datapoint);
 });
 
 // three.js

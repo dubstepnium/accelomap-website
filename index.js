@@ -18,7 +18,7 @@ app.use(express.static('public/'));
 
 // api endpoints
 app.get('/api/getmap', function(req, res) {
-  res.send(maps[req.params.id] || null);
+  res.send(maps[req.query.id] || null);
 });
 app.get('/api/getid', function(req, res) {
   let id;
@@ -36,11 +36,13 @@ app.get('/api/datapoint', function(req, res) {
     res.send(null);
     return;
   }
-  maps[id].push({
+  const datapoint = {
     id: id,
     time: time,
     acceleration: acceleration
-  });
+  };
+  maps[id].push(datapoint);
+  io.to('/map/' + id, 'datapoint', datapoint);
   return true;
 });
 
